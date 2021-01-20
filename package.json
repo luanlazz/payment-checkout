@@ -1,0 +1,17 @@
+{
+  "name": "bexs-front-end-exam",
+  "version": "1.0.0",
+  "description": "Desafio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/bexstech/bexs-front-end-exam.git"
+  },
+  "keywords": [],
+  "author": "Luan",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/bexstech/bexs-front-end-exam#readme"
+}
