@@ -13,5 +13,8 @@
   "keywords": [],
   "author": "Luan",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/bexstech/bexs-front-end-exam#readme"
+  "homepage": "https://bitbucket.org/bexstech/bexs-front-end-exam#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.0.0"
+  }
 }
