@@ -1,9 +1,12 @@
 {
   "name": "bexs-front-end-exam",
   "version": "1.0.0",
-  "description": "Desafio",
+  "description": "Challenge",
   "main": "index.js",
   "scripts": {
+    "start": "node index",
+    "dev": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "test": "jest --passWithNoTests --no-cache --runInBand"
   },
   "repository": {
@@ -25,6 +28,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-standard": "^4.1.0",
     "git-commit-msg-linter": "^3.0.0",
     "husky": "^4.3.8",
