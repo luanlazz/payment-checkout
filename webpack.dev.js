@@ -9,6 +9,12 @@ module.exports = merge(common, {
       test: /\.ts(x?)$/,
       loader: 'ts-loader',
       exclude: /node_modules/
+    }, {
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      loader: 'file-loader',
+      options: {
+        name: 'assets/[name].[ext]'
+      }
     }]
   },
   devServer: {
