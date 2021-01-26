@@ -28,23 +28,22 @@ const theme = createMuiTheme({
     // two indexes within its tonal palette.
     // E.g., shift from Red 500 to Red 300 or Red 700.
     tonalOffset: 0.2
+  },
+  typography: {
+    fontFamily: '"Verdana", "Arial", "sans-serif"'
   }
 })
 
 console.log('theme :>> ', theme)
 
 const App: React.FC = () => (
-  <>
-    <div>
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <RouterConfig />
-          </BrowserRouter>
-        </ThemeProvider>
-      </MuiThemeProvider>
-    </div>
-  </>
+  <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <RouterConfig />
+      </BrowserRouter>
+    </ThemeProvider>
+  </MuiThemeProvider>
 )
 
 export default App
