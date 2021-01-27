@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import newCard from '../../../assets/new-card.png'
-import { Button, Grid, Link, Paper, Step, StepLabel, Stepper, Typography } from '@material-ui/core'
+import { Button, Grid, Link, Paper, Step, StepLabel, Stepper, Typography, useMediaQuery, useTheme } from '@material-ui/core'
+import { breakpoints } from '@material-ui/system'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
@@ -85,6 +86,8 @@ const getPreviousStep = (step: number): string => {
 const Checkout: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0)
   const steps = getSteps()
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.up('md'))
 
   const handleNext = (): void => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
@@ -95,35 +98,48 @@ const Checkout: React.FC = () => {
   }
 
   return (
-    <CheckoutContainer container>
+    <CheckoutContainer container xs={12}>
       <CheckoutPaper>
-        <Navigation item xs={12} sm={12} md={4}>
-          <BackStep>
-            {activeStep > 0 &&
-              <>
+        <Navigation item xs={12} sm={12} md={5}>
+          <Grid item>
+
+            {activeStep > 0 && matches &&
+              <LinkComponent onClick={handleBack}>
                 <ArrowBackIosIcon />
-                <LinkComponent onClick={handleBack}>
-                  {getPreviousStep(activeStep)}
-                </LinkComponent>
-              </>
+                {matches && getPreviousStep(activeStep) }
+              </LinkComponent>
             }
-          </BackStep>
+
+            {!matches &&
+              <Typography color='textSecondary'>
+                {activeStep > 0 &&
+                  <BackLink>
+                    <ArrowBackIosIcon onClick={handleBack} />
+                  </BackLink>
+                }
+                <b>{'Etapa '} {activeStep + 1}</b>
+                {' de '} {getSteps().length}
+              </Typography>
+            }
+          </Grid>
 
           <StepTitle>
             {getStepTitle(activeStep)}
           </StepTitle>
         </Navigation>
 
-        <CheckoutStepper item>
-          <Stepper activeStep={activeStep} connector={<ArrowForwardIosIcon color='primary' />}>
-            {steps.map((label, index) => (
-              <Step key={index}>
-                <StepLabel>
-                  {label}
-                </StepLabel>
-              </Step>
-            ))}
-          </Stepper>
+        <CheckoutStepper item xs={12} sm={12} md={7}>
+          {matches &&
+            <Stepper activeStep={activeStep} connector={<ArrowForwardIosIcon color='primary' />}>
+              {steps.map((label, index) => (
+                <Step key={index}>
+                  <StepLabel>
+                    {label}
+                  </StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          }
 
           <StepContent>
             {activeStep === steps.length ? (
@@ -134,7 +150,7 @@ const Checkout: React.FC = () => {
               </div>
             ) : (
               <Grid item xs={12}>
-                <Grid item xs={12} alignContent='center'>
+                <Grid item xs={12}>
                   {getStepContent(activeStep)}
                 </Grid>
 
@@ -171,33 +187,46 @@ const CheckoutPaper = styled(Paper)`
   flex-direction: row;
   flex-wrap: wrap;
   height: 596px;
-  margin: ${({ theme }) => theme.spacing(4)}px;
-  max-width: 90%;
+  ${({ theme }) => theme.breakpoints.up('sm')} {
+    margin: ${({ theme }) => theme.spacing(4)}px;
+  }
 `
 
 const Navigation = styled(Grid)`
   background: ${({ theme }) => theme.palette.primary.main};
+  display: flex;
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    justify-content: center;
+  }
+  ${({ theme }) => theme.breakpoints.up('md')} {
+    justify-content: flex-start;
+  }
   margin: 0;
-  padding: ${({ theme }) => theme.spacing(5)}px
-           ${({ theme }) => theme.spacing(3)}px
-           ${({ theme }) => theme.spacing(3)}px
-           ${({ theme }) => theme.spacing(8)}px;
   min-width: 330px;
   position: relative;
-`
-
-const BackStep = styled.div`
-  align-items: center;
-  color: ${({ theme }) => theme.palette.common.white};
-  display: flex;
-  flex-direction: row;
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    padding: ${({ theme }) => theme.spacing(3)}px;
+  }
+  ${({ theme }) => theme.breakpoints.up('md')} {
+    padding: ${({ theme }) => theme.spacing(5)}px
+             ${({ theme }) => theme.spacing(3)}px
+             ${({ theme }) => theme.spacing(3)}px
+             ${({ theme }) => theme.spacing(7)}px;
+  }   
 `
 
 const LinkComponent = styled(Link)`
+  align-items: center;
+  flex-direction: row;
+
   && {
-    color: ${({ theme }) => theme.palette.common.white};
+    color: ${({ theme }) => theme.palette.text.secondary};
+    display: flex;
     font-size: 22px;
     text-decoration: none;
+    ${({ theme }) => theme.breakpoints.down('md')} {
+      justify-content: flex-start;
+    }
 
     :hover {
       text-decoration: none;
@@ -206,14 +235,25 @@ const LinkComponent = styled(Link)`
   }
 `
 
+const BackLink = styled.div`
+  position: absolute;
+  left: ${({ theme }) => theme.spacing(4)}px;
+  cursor: pointer;
+`
+
 const StepTitle = styled.div`
   align-items: center;
-  color: ${({ theme }) => theme.palette.common.white};
+  color: ${({ theme }) => theme.palette.text.secondary};
   display: flex;
   flex-direction: row;  
   max-width: 300px;
-  top: ${({ theme }) => theme.spacing(14)}px;
   position: absolute;
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    top: ${({ theme }) => theme.spacing(8)}px;
+  }
+  ${({ theme }) => theme.breakpoints.up('md')} {
+    top: ${({ theme }) => theme.spacing(14)}px;
+  }  
 `
 
 const Title = styled.h2` 
@@ -237,13 +277,24 @@ const Icon = styled.div`
 
 const CheckoutStepper = styled(Grid)`
   display: flex;
+  color: ${({ theme }) => theme.palette.common.black};
   flex-direction: column;
   justify-content: flex-start;
   right: 0;
-  padding: ${({ theme }) => theme.spacing(5)}px
-           ${({ theme }) => theme.spacing(3)}px
-           ${({ theme }) => theme.spacing(3)}px
-           ${({ theme }) => theme.spacing(15)}px;
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    padding: ${({ theme }) => theme.spacing(3)}px;
+  }
+  ${({ theme }) => theme.breakpoints.up('md')} {
+    padding: ${({ theme }) => theme.spacing(5)}px
+             ${({ theme }) => theme.spacing(3)}px
+             ${({ theme }) => theme.spacing(3)}px
+             ${({ theme }) => theme.spacing(12)}px;
+  }
+
+  & .MuiStepLabel-label, 
+    .MuiStepIcon-root {
+    color: ${({ theme }) => theme.palette.text.primary};
+  }
 `
 
 const StepContent = styled(Grid)`
