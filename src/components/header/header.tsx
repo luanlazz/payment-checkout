@@ -1,16 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useMediaQuery, useTheme } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
 import logo from '../../../assets/demo-shop.png'
 
 const Header: React.FC = () => {
+  const theme = useTheme()
+  const matchesMD = useMediaQuery(theme.breakpoints.up('md'))
+
   return (
     <HeaderComponent>
       <Logo src={logo} />
-      <Menu>
-        <Option />
-        <Option />
-        <Option />
-      </Menu>
+      {matchesMD
+        ? (
+          <Menu>
+            <Option />
+            <Option />
+            <Option />
+          </Menu>
+        )
+        : (<MenuIcon />)
+      }
+
     </HeaderComponent>
   )
 }
