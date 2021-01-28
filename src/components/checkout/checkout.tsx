@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Button, Grid, Paper, Step, StepLabel, Stepper, Typography, useMediaQuery, useTheme } from '@material-ui/core'
-import CheckoutNavigation from './checkout-navigation'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import CheckoutNavigation from './checkout-navigation'
+import { Payment } from '@/pages'
 
-const getSteps = (): any[] => {
+const getSteps = (): string[] => {
   return [
     'Carrinho',
     'Pagamento',
@@ -12,16 +13,16 @@ const getSteps = (): any[] => {
   ]
 }
 
-const getStepContent = (step: number): string => {
+const getStepContent = (step: number): React.ReactNode => {
   switch (step) {
     case 0:
-      return 'Carrinho'
+      return <h1>Carrinho</h1>
     case 1:
-      return 'Pagamento'
+      return <Payment />
     case 2:
-      return 'Confirmação'
+      return <h1>Confirmação</h1>
     default:
-      return 'Etapa desconhecida'
+      return <h1>Etapa desconhecida</h1>
   }
 }
 

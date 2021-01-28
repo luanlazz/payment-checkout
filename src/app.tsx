@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
 import { RouterConfig } from './navigation'
+import { OrderProvider } from './contexts'
 
 const theme = createMuiTheme({
   palette: {
@@ -43,9 +44,11 @@ console.log('theme :>> ', theme)
 const App: React.FC = () => (
   <MuiThemeProvider theme={theme}>
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <RouterConfig />
-      </BrowserRouter>
+      <OrderProvider>
+        <BrowserRouter>
+          <RouterConfig />
+        </BrowserRouter>
+      </OrderProvider>
     </ThemeProvider>
   </MuiThemeProvider>
 )
