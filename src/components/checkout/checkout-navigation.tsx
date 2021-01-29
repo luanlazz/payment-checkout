@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Grid, Link, Typography } from '@material-ui/core'
-import { CardFront } from '@/components'
-import newCard from '../../../assets/new-card.png'
+import { Card } from '@/components'
+import newCard from '@/assets/new-card.png'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import DoneIcon from '@material-ui/icons/Done'
@@ -27,7 +27,7 @@ const getStepTitle = (step: number): React.ReactNode => {
           <Title>
             Adicione um novo cartão de crédito
           </Title>
-          <CardFront />
+          <Card />
         </>
       )
     case 2:

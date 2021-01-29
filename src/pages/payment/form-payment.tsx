@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useRef, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import styled from 'styled-components'
 import { FormHelperText, Grid, GridSize, MenuItem, TextField } from '@material-ui/core'
 import { OrderContext, PaymentInitialState, PaymentProp } from '@/contexts'
@@ -124,10 +124,9 @@ const validate = {
 }
 
 const FormPayment: React.FC<Props> = ({ onUpdate }: Props) => {
-  const { payment } = useContext(OrderContext)
+  const { payment, setFrontCard } = useContext(OrderContext)
   const [paymentState, dispatch] = useReducer(reducer, payment)
   const [errors, setErrors] = useState({})
-  const numberCard = useRef()
 
   useEffect(() => {
     onUpdate(paymentState)
@@ -151,8 +150,18 @@ const FormPayment: React.FC<Props> = ({ onUpdate }: Props) => {
     }))
   }
 
+  const flipCard = (e): void => {
+    const { name } = e.target
+
+    if (name === 'cvv') {
+      setFrontCard(false)
+    } else {
+      setFrontCard(true)
+    }
+  }
+
   return (
-    <Grid container spacing={2} justify='center'>
+    <Grid container justify='center'>
       <Form>
         {[
           {
@@ -160,8 +169,7 @@ const FormPayment: React.FC<Props> = ({ onUpdate }: Props) => {
             xs: 12,
             name: 'number',
             hasMask: true,
-            mask: numberMask,
-            inputRef: numberCard
+            mask: numberMask
           },
 
           {
@@ -206,6 +214,7 @@ const FormPayment: React.FC<Props> = ({ onUpdate }: Props) => {
               error={errors[field.name] != null}
               onChange={handleChangeField}
               onBlur={handleBlur}
+              onFocus={flipCard}
               inputProps={{ ...field.props }}
               fullWidth
             >

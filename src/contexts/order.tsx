@@ -11,6 +11,8 @@ export interface PaymentProp {
 export interface ContextProps {
   payment: PaymentProp
   setPayment: Function
+  frontCard: boolean
+  setFrontCard: Function
 }
 
 export const PaymentInitialState: PaymentProp = {
@@ -23,7 +25,9 @@ export const PaymentInitialState: PaymentProp = {
 
 const OrderContext = createContext<ContextProps>({
   payment: { ...PaymentInitialState },
-  setPayment: () => null
+  setPayment: () => null,
+  frontCard: true,
+  setFrontCard: () => null
 })
 
 interface Props {
@@ -32,11 +36,14 @@ interface Props {
 
 const OrderProvider: React.ComponentType<Props> = ({ children }: Props) => {
   const [payment, setPayment] = useState<PaymentProp>({ ...PaymentInitialState })
+  const [frontCard, setFrontCard] = useState(true)
 
   return (
     <OrderContext.Provider value={{
       payment,
-      setPayment
+      setPayment,
+      frontCard,
+      setFrontCard
     }}>
       {children}
     </OrderContext.Provider>
