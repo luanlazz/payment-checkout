@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Grid, Link, Typography } from '@material-ui/core'
+import { Card } from '@/components'
 import newCard from '../../../assets/new-card.png'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
@@ -26,6 +27,7 @@ const getStepTitle = (step: number): React.ReactNode => {
           <Title>
             Adicione um novo cartão de crédito
           </Title>
+          <Card />
         </>
       )
     case 2:
@@ -77,22 +79,22 @@ const CheckoutNavigation: React.FC<Props> = ({ activeStep, setActiveStep, matche
       <Grid item>
 
         {activeStep > 0 && matchesMD &&
-              <LinkComponent onClick={handleBack}>
-                <ArrowBackIosIcon />
-                {matchesMD && getPreviousStep(activeStep) }
-              </LinkComponent>
+          <LinkComponent onClick={handleBack}>
+            <ArrowBackIosIcon />
+            {matchesMD && getPreviousStep(activeStep) }
+          </LinkComponent>
         }
 
         {!matchesMD &&
-              <Typography color='textSecondary'>
-                {activeStep > 0 &&
-                  <BackLink>
-                    <ArrowBackIosIcon onClick={handleBack} />
-                  </BackLink>
-                }
-                <b>{'Etapa '} {activeStep + 1}</b>
-                {' de '} {getSteps().length}
-              </Typography>
+          <Typography color='textSecondary'>
+            {activeStep > 0 &&
+              <BackLink>
+                <ArrowBackIosIcon onClick={handleBack} />
+              </BackLink>
+            }
+            <b>{'Etapa '} {activeStep + 1}</b>
+            {' de '} {getSteps().length}
+          </Typography>
         }
       </Grid>
 
@@ -113,7 +115,7 @@ const Navigation = styled(Grid)`
     justify-content: flex-start;
   }
   margin: 0;
-  min-width: 330px;
+  min-width: 290px;
   position: relative;
   ${({ theme }) => theme.breakpoints.down('md')} {
     padding: ${({ theme }) => theme.spacing(3)}px;
@@ -133,7 +135,7 @@ const LinkComponent = styled(Link)`
   && {
     color: ${({ theme }) => theme.palette.text.secondary};
     display: flex;
-    font-size: 22px;
+    font-size: 1rem;
     text-decoration: none;
     ${({ theme }) => theme.breakpoints.down('md')} {
       justify-content: flex-start;
