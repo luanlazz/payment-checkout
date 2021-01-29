@@ -29,7 +29,7 @@ interface Props {
 const numberValidation = (fieldValue): string => {
   const valueClear = fieldValue.replace(/ /g, '')
 
-  if (valueClear.length !== 16) {
+  if (valueClear.length < 14) {
     return 'Número de cartão inválido'
   }
 
@@ -255,7 +255,7 @@ const Form = styled.form`
   flex-wrap: wrap;
   justify-content: center;
   min-width: 200px;
-  max-width: 400px;
+  max-width: 500px;
 
   & .MuiFormLabel-root {
     color: ${({ theme }) => theme.palette.grey[500]};

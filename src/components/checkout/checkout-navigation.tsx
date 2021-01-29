@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Grid, Link, Typography } from '@material-ui/core'
-import { Card } from '@/components'
+import { CardFront } from '@/components'
 import newCard from '../../../assets/new-card.png'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
@@ -27,7 +27,7 @@ const getStepTitle = (step: number): React.ReactNode => {
           <Title>
             Adicione um novo cartão de crédito
           </Title>
-          <Card />
+          <CardFront />
         </>
       )
     case 2:
@@ -108,19 +108,19 @@ const CheckoutNavigation: React.FC<Props> = ({ activeStep, setActiveStep, matche
 const Navigation = styled(Grid)`
   background: ${({ theme }) => theme.palette.primary.main};
   display: flex;
-  ${({ theme }) => theme.breakpoints.down('md')} {
-    justify-content: center;
-  }
-  ${({ theme }) => theme.breakpoints.up('md')} {
-    justify-content: flex-start;
-  }
   margin: 0;
   min-width: 290px;
   position: relative;
+
   ${({ theme }) => theme.breakpoints.down('md')} {
+    height: 239px;
+    justify-content: center;
     padding: ${({ theme }) => theme.spacing(3)}px;
   }
+
   ${({ theme }) => theme.breakpoints.up('md')} {
+    height: auto;
+    justify-content: flex-start;
     padding: ${({ theme }) => theme.spacing(5)}px
              ${({ theme }) => theme.spacing(3)}px
              ${({ theme }) => theme.spacing(3)}px

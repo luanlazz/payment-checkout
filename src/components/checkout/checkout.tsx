@@ -98,15 +98,12 @@ const CheckoutContainer = styled(Grid)`
   align-items: center;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   justify-content: center;
 `
 
 const CheckoutPaper = styled(Paper)`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  height: 596px;
   ${({ theme }) => theme.breakpoints.up('sm')} {
     margin: ${({ theme }) => theme.spacing(4)}px;
   }
@@ -116,14 +113,15 @@ const CheckoutStepper = styled(Grid)`
   display: flex;
   color: ${({ theme }) => theme.palette.common.black};
   flex-direction: column;
-  justify-content: flex-start;
-  right: 0;
   ${({ theme }) => theme.breakpoints.down('md')} {
-    padding: ${({ theme }) => theme.spacing(3)}px;
+    padding: ${({ theme }) => theme.spacing(12)}px
+             ${({ theme }) => theme.spacing(3)}px
+             ${({ theme }) => theme.spacing(3)}px
+             ${({ theme }) => theme.spacing(3)}px;
   }
   ${({ theme }) => theme.breakpoints.up('md')} {
-    padding: ${({ theme }) => theme.spacing(5)}px
-             ${({ theme }) => theme.spacing(3)}px
+    padding: ${({ theme }) => theme.spacing(4)}px
+             ${({ theme }) => theme.spacing(6)}px
              ${({ theme }) => theme.spacing(3)}px
              ${({ theme }) => theme.spacing(12)}px;
   }
@@ -132,6 +130,13 @@ const CheckoutStepper = styled(Grid)`
     .MuiStepIcon-root {
     color: ${({ theme }) => theme.palette.text.primary};
   }
+
+  & .MuiStepper-root {
+    padding: ${({ theme }) => theme.spacing(3)}px
+             ${({ theme }) => theme.spacing(1)}px
+             ${({ theme }) => theme.spacing(3)}px
+             ${({ theme }) => theme.spacing(1)}px;
+  }
 `
 
 const StepContent = styled(Grid)`
@@ -139,6 +144,7 @@ const StepContent = styled(Grid)`
   flex-direction: column;
   flex-grow: 1;
   position: relative;
+  min-height: 400px;
 `
 
 const ButtonNextStep = styled(Grid)`

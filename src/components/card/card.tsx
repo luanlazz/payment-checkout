@@ -1,57 +1,79 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { Grid, Typography as MaterialTypography } from '@material-ui/core'
+import { Grid, Typography as MaterialTypography, useMediaQuery, useTheme } from '@material-ui/core'
 import { OrderContext } from '@/contexts'
 
-const getType = (number): string => {
-  const valueClear = number.replace(/ /g, '')
+const getType = (cardNumber: string, size: number): string => {
+  const valueClear = cardNumber.replace(/ /g, '')
 
   if (/^4[0-9]{6,}$/.test(valueClear)) {
-    return 'https://api.iconify.design/logos-visa.svg?width=70&height=70'
+    return `https://api.iconify.design/logos-visa.svg?width=${size}&height=${size}`
   } else if (/^5[1-5][0-9]{5,}|222[1-9][0-9]{3,}|22[3-9][0-9]{4,}|2[3-6][0-9]{5,}|27[01][0-9]{4,}|2720[0-9]{3,}$/.test(valueClear)) {
-    return 'https://api.iconify.design/logos:mastercard.svg?width=70&height=70'
+    return `https://api.iconify.design/logos:mastercard.svg?width=${size}&height=${size}`
   } else if (/^3(?:0[0-5]|[68][0-9])[0-9]{4,}$/.test(valueClear)) {
-    return 'https://api.iconify.design/logos:dinersclub.svg?width=70&height=70'
+    return `https://api.iconify.design/logos:dinersclub.svg?width=${size}&height=${size}`
   } else if (/^6(?:011|5[0-9]{2})[0-9]{3,}$/.test(valueClear)) {
-    return 'https://api.iconify.design/logos:discover.svg?width=70&height=70'
+    return `https://api.iconify.design/logos:discover.svg?width=${size}&height=${size}`
   }
 
   return ''
 }
 
-const Card: React.FC = () => {
+const CardFront: React.FC = () => {
   const { payment } = useContext(OrderContext)
+  const theme = useTheme()
+  const matchesMD = useMediaQuery(theme.breakpoints.up('md'))
 
   return (
-    <CardContainer>
+    <CardContainer height={matchesMD ? 224 : 172} width={matchesMD ? 364 : 280}>
       <Details container>
-        <Operator>
-          <img src={getType(payment.number)}/>
-        </Operator>
-        <NumberCard xs={12}>
-          <Typography size={1.8}>{payment.number}</Typography>
-        </NumberCard>
-        <NameCard item xs={10}>
-          <Typography size={1.2}>{payment.name}</Typography>
-        </NameCard>
-        <ValidateCard item xs={2}>
-          <Typography size={1.2}>{payment.validate}</Typography>
-        </ValidateCard>
+        {matchesMD
+          ? <>
+            <Operator>
+              <img src={getType(payment.number, 70) }/>
+            </Operator>
+            <NumberCard xs={12} top={14}>
+              <Typography noWrap size={1.8}>{payment.number}</Typography>
+            </NumberCard>
+            <NameCard item xs={10} top={20}>
+              <Typography size={1.2}>{payment.name}</Typography>
+            </NameCard>
+            <ValidateCard item xs={2} top={20} left={33}>
+              <Typography size={1.2}>{payment.validate}</Typography>
+            </ValidateCard>
+          </>
+          : <>
+            <Operator>
+              <img src={getType(payment.number, 50) }/>
+            </Operator>
+            <NumberCard xs={12} top={10}>
+              <Typography noWrap size={1.5}>{payment.number}</Typography>
+            </NumberCard>
+            <NameCard item xs={10} top={15}>
+              <Typography size={1.0}>{payment.name}</Typography>
+            </NameCard>
+            <ValidateCard item xs={2} top={15} left={28}>
+              <Typography size={1.0}>{payment.validate}</Typography>
+            </ValidateCard>
+          </>
+        }
       </Details>
     </CardContainer>
   )
 }
 
-const CardContainer = styled(Grid)`
+interface ICardContainer {
+  height: number
+  width: number
+}
+
+const CardContainer = styled(Grid)<ICardContainer>`
   background: ${({ theme }) => theme.palette.grey[500]};
-  border-radius: 8px;
-  height: 224px;
+  border-radius: 8px;  
   position: absolute;
-  top: ${({ theme }) => theme.spacing(12)}px;
-  
-  && {
-    width: 364px;
-  }
+  height: ${(props) => props.height}px;
+  top: ${({ theme }) => theme.spacing(12)}px;   
+  width: ${(props) => props.width}px;
 `
 
 const Details = styled(Grid)`
@@ -61,21 +83,34 @@ const Details = styled(Grid)`
 const Operator = styled(Grid)`
   position: absolute;
 `
+interface INumberCard {
+  top: number
+}
 
-const NumberCard = styled(Grid)`
+const NumberCard = styled(Grid)<INumberCard>`
   position: absolute;
-  top: ${({ theme }) => theme.spacing(14)}px;
+  overflow: hidden;
+  top: ${(props) => props.theme.spacing(props.top)}px;
 `
 
-const NameCard = styled(Grid)`
+interface INameCard {
+  top: number
+}
+
+const NameCard = styled(Grid)<INameCard>`
   position: absolute;
-  top: ${({ theme }) => theme.spacing(20)}px;
+  top: ${(props) => props.theme.spacing(props.top)}px;
 `
 
-const ValidateCard = styled(Grid)`
+interface IValidateCard {
+  top: number
+  left: number
+}
+
+const ValidateCard = styled(Grid)<IValidateCard>`
   position: absolute;
-  top: ${({ theme }) => theme.spacing(20)}px;
-  left: ${({ theme }) => theme.spacing(33)}px;
+  top: ${(props) => props.theme.spacing(props.top)}px;
+  left: ${(props) => props.theme.spacing(props.left)}px;
 `
 
 interface ITypography {
@@ -84,8 +119,9 @@ interface ITypography {
 
 const Typography = styled(MaterialTypography)<ITypography>`
   && {
-    font: normal normal normal ${(props) => props.size}rem SF Pro Text;
+    font-family: SF Pro Text;
+    font-size: ${(props) => props.size}rem;
   }
 `
 
-export default Card
+export default CardFront
