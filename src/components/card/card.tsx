@@ -24,7 +24,7 @@ const Card: React.FC = () => {
 
   return (
     <CardContainer>
-      <Details container xs={12}>
+      <Details container>
         <Operator>
           <img src={getType(payment.number)}/>
         </Operator>

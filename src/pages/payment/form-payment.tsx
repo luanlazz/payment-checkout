@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { FormHelperText, Grid, GridSize, MenuItem, TextField } from '@material-ui/core'
-import { PaymentInitialState, PaymentProp } from '@/contexts'
+import { OrderContext, PaymentInitialState, PaymentProp } from '@/contexts'
 
 const parcels = [
   {
@@ -124,7 +124,8 @@ const validate = {
 }
 
 const FormPayment: React.FC<Props> = ({ onUpdate }: Props) => {
-  const [paymentState, dispatch] = useReducer(reducer, PaymentInitialState)
+  const { payment } = useContext(OrderContext)
+  const [paymentState, dispatch] = useReducer(reducer, payment)
   const [errors, setErrors] = useState({})
   const numberCard = useRef()
 
@@ -232,6 +233,11 @@ function reducer (state, action): PaymentProp {
       return {
         ...state,
         [action.payload.name]: action.payload.value
+      }
+
+    case 'LOAD_STATE':
+      return {
+        ...action.payload
       }
 
     case 'RESET':
