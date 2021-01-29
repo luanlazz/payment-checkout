@@ -17,7 +17,7 @@ const CardBehind: React.FC<ICardBehind> = ({ matchesMD, payment }: ICardBehind) 
         </CvvCard>
       </>
       : <>
-        <CvvCard item xs={2} top={8} left={20}>
+        <CvvCard item xs={2} top={13} left={23}>
           <Typography size={1.0}>{payment.cvv}</Typography>
         </CvvCard>
       </>
