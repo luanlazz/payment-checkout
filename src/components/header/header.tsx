@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useMediaQuery, useTheme } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
-import logo from '../../../assets/demo-shop.png'
+import logo from '@/assets/demo-shop.png'
 
 const Header: React.FC = () => {
   const theme = useTheme()
