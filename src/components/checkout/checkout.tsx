@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Button, Grid, Paper, Step, StepLabel, Stepper, Typography, useMediaQuery, useTheme } from '@material-ui/core'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import CheckoutNavigation from './checkout-navigation'
-import { Payment } from '@/pages'
+import { Payment } from '@/components'
 import { useOrder } from '@/hooks'
 import { useHistory } from 'react-router-dom'
 
