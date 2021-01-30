@@ -1,46 +1,13 @@
-# Exame - Bexs Front-end
+# Instruções
 
-## Desafio
+Para incorporar o componente de pagamento a outra aplicação, se faz necessários algumas configurações. Nele utiliza-se um context para armazenar os dados informados e a função para realizar a requisição ao serviço de pagamentos. Além de um hook para facilitar o uso do context.
 
-Desenvolver uma aplicação front-end de acordo com as especificações descritas nos **requisitos** utilizando a _stack_ tecnologica de sua preferencia.
+O serviço de pagamento, encontra-se na pasta services, onde realiza um post ao end-point '/pagar' com os dados armazenados no context.
 
-- Desenvolva este Layout: https://xd.adobe.com/spec/9c4a9206-ac61-4050-796d-89c00fb79e91-ea7b
-- Utilize a tecnologia de sua preferencia (ReactJs, Angular, Angularjs, Vue.js, Jquery, Bootstrap, Material, Nodejs, Java, C#, PHP, etc).
+Vale destacar que o projeto utiliza imagens .png, sendo assim deve-se realizar o devido tratamento para compilação. Bem como o typescript utilizado nos componentes.
 
-## Como entregar sua solução?
+## Scripts
 
-1. Clone do repositório
-
-2. Tente explicar a evolução do projeto em _commits_.
-
-3. Caso use algum _task runner_/_module bundle_ - faça o commit da ultima versão build/bundle.
-
-4. Para nos enviar seu teste escolha uma das formas:
-
-### Gerar um patch:
-
-Para gerar o patch:
-
-```
-git format-patch origin/master --stdout > seu_nome.patch
-```
-
-Certifique que o patch irá funcionar executando >> `git apply seu_nome.patch` e nos envie através do email que entramos em contato
-
-### Criando um repositório público:
-
-Crie um repositório em uma plataforma de pública de repositórios (GitHub, BitBucket, GitLab, etc) e nos envie através do email que entramos em contato.
-
-## Requisitos
-
-- Faça códigos legiveis e utilize uma arquitetura de fácil entendimento.
-- Edite este Readme ou crie um novo Markdown explicando como um DEV deveria utilizar o projeto
-
-## Bonus
-
-- Testes automatizados.
-- Crie uma camada que efetue uma chamada REST para um endpoint fictício "/pagar" - iremos analisar apenas a estrutura
-
-## Dúvidas
-
-Entre em contato e nos questione.
+1. npm start: executa a aplicação a partir do build (localhost:3000);
+2. npm dev: executa a aplicação em modo de desenvolvimento (localhost:8080);
+3. build: executa o build do projeto, gerando a pasta dist na raiz;
