@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Grid, useMediaQuery, useTheme } from '@material-ui/core'
-import { OrderContext } from '@/contexts'
 import { CardFront, CardBehind } from '@/components'
+import { useOrder } from '@/hooks'
 import bgCardFront from '@/assets/card-front.png'
 import bgCardBehind from '@/assets/card-back.png'
 
@@ -23,7 +23,7 @@ const getType = (cardNumber: string, size: number): string => {
 }
 
 const Card: React.FC = () => {
-  const { payment, frontCard } = useContext(OrderContext)
+  const { payment, frontCard } = useOrder()
   const theme = useTheme()
   const matchesMD = useMediaQuery(theme.breakpoints.up('md'))
 
