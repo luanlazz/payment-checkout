@@ -51,7 +51,9 @@ const numberMask = (value): string => {
 }
 
 const nameValidation = (fieldValue): string => {
-  if (fieldValue.trim() === '') {
+  const valueTrim = fieldValue.trim()
+
+  if (valueTrim.length < 3) {
     return 'Insira seu nome completo'
   }
 
@@ -59,11 +61,7 @@ const nameValidation = (fieldValue): string => {
     return 'Insira apenas letras'
   }
 
-  if (fieldValue.trim().length < 3) {
-    return 'Insira seu nome completo'
-  }
-
-  const nameSplit: [] = fieldValue.split(' ')
+  const nameSplit: [] = valueTrim.split(' ')
   if (nameSplit.length < 2) {
     return 'Insira seu nome completo'
   }
