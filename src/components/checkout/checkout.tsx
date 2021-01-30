@@ -4,6 +4,8 @@ import { Button, Grid, Paper, Step, StepLabel, Stepper, Typography, useMediaQuer
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import CheckoutNavigation from './checkout-navigation'
 import { Payment } from '@/pages'
+import { useOrder } from '@/hooks'
+import { useHistory } from 'react-router-dom'
 
 const getSteps = (): string[] => {
   return [
@@ -28,12 +30,19 @@ const getStepContent = (step: number): React.ReactNode => {
 
 const Checkout: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0)
+  const { sendPayment } = useOrder()
   const steps = getSteps()
   const theme = useTheme()
   const matchesMD = useMediaQuery(theme.breakpoints.up('md'))
+  const history = useHistory()
 
   const handleNext = (): void => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    if (activeStep + 1 === steps.length) {
+      sendPayment()
+      history.push('/success')
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    }
   }
 
   return (

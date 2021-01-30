@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Checkout, Header } from '@/components'
+import { Checkout } from '@/components'
 
 const Store: React.FC = () => (
   <StoreContainer>
-    <Header />
     <Checkout />
   </StoreContainer>
 )

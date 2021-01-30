@@ -1,8 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
-interface HttpResponse<T = any> {
-  statusCode: number
-  body?: T
-}
+import axios from 'axios'
 
 export interface PaymentProp {
   number: string
@@ -12,21 +8,14 @@ export interface PaymentProp {
   numParcels: string
 }
 
-export const makePayment = async (payment: PaymentProp): Promise<HttpResponse> => {
-  let axiosResponse: AxiosResponse
-
+export const makePayment = async (payment: PaymentProp): Promise<void> => {
   try {
-    axiosResponse = await axios.request({
+    await axios.request({
       url: '/pagar',
       method: 'post',
       data: payment
     })
   } catch (error) {
-    axiosResponse = error.response
-  }
-
-  return {
-    statusCode: axiosResponse.status,
-    body: axiosResponse.data
+    console.log('Error on request')
   }
 }
