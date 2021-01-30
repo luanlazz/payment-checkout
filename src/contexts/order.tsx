@@ -1,13 +1,5 @@
 import React, { createContext, useState } from 'react'
-
-export interface PaymentProp {
-  number: string
-  name: string
-  validate: string
-  cvv: string
-  numParcels: string
-}
-
+import { PaymentProp } from '@/services'
 export interface ContextProps {
   payment: PaymentProp
   setPayment: Function

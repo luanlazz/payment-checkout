@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Grid, Typography as MaterialTypography } from '@material-ui/core'
-import { PaymentProp } from '@/contexts'
+import { PaymentProp } from '@/services'
 
 interface ICardFront {
   getType: Function

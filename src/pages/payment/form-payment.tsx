@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react'
 import styled from 'styled-components'
 import { FormHelperText, Grid, GridSize, MenuItem, TextField } from '@material-ui/core'
-import { OrderContext, PaymentInitialState, PaymentProp } from '@/contexts'
+import { OrderContext, PaymentInitialState } from '@/contexts'
+import { PaymentProp } from '@/services'
 
 const parcels = [
   {

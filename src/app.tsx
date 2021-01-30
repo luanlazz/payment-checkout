@@ -39,8 +39,6 @@ const theme = createMuiTheme({
   }
 })
 
-console.log('theme :>> ', theme)
-
 const App: React.FC = () => (
   <MuiThemeProvider theme={theme}>
     <ThemeProvider theme={theme}>
